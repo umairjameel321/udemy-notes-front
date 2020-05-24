@@ -1,0 +1,13 @@
+<form [formGroup]="createCategoryFormGroup" novalidate (ngSubmit)="createCategoryFormGroup.valid">
+  <h4 style="margin-top:0;">{{isEditState == false ? 'Add Category': 'Edit Category'}}</h4>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Category Name" formControlName="name">
+    <mat-error *ngIf="createCategoryFormGroup.controls.name.errors ">
+      <span *ngIf="createCategoryFormGroup.controls.name.errors?.required">name is
+        <strong>required</strong></span>
+    </mat-error>
+  </mat-form-field>
+  <button *ngIf="!isEditState" mat-raised-button color="primary" type="submit" (click)="createCategory()">Create</button>
+  <button *ngIf="isEditState" mat-raised-button color="primary" type="submit" (click)="editCategory()">Save</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</form>

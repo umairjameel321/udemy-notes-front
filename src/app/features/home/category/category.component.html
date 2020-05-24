@@ -1,0 +1,57 @@
+<mat-sidenav-container class="sidenav-container" color= "primary">
+    <mat-sidenav #drawer color= "primary" class="sideNavigation" fixedInViewport="true" mode="side" opened="true">
+      <!-- <mat-toolbar class="logo"> -->
+        <!-- <mat-toolbar-row>
+          <span>Notes</span>
+        </mat-toolbar-row> -->
+      <!-- </mat-toolbar> -->
+      <mat-nav-list style="margin-top:8px"  class="navigation-list">
+        <a mat-list-item class="nav-list-item">
+          <button mat-raised-button color="primary" (click)="openCreateCategory()">Add Category <mat-icon>add</mat-icon>
+            </button>
+        </a>
+        <div *ngIf=catList>
+          <a *ngFor="let nav of catList" mat-list-item class="nav-list-item" >
+            <span class="menu-text" [routerLink]="[nav.path, nav.id, 'notes']" (click)="updateState(nav.label)">
+                <mat-icon class="nav-icon">{{nav.icon}}</mat-icon>
+                <span class="nav-label">{{nav.label}}</span>
+            </span>
+          
+            <button class="submenu" mat-button [matMenuTriggerFor]="CategoryOptions">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #CategoryOptions="matMenu">
+              <button class="custom-btn" mat-menu-item (click)=editCategory(nav)>Edit</button>
+              <button class="custom-btn" mat-menu-item (click)="deleteCategory(nav)">Delete</button>
+            </mat-menu>
+          </a>
+        </div>
+  
+        <!-- <mat-menu #CategoryOptions="matMenu">
+          <button class="custom-btn" mat-menu-item routerLink="/home/profile">Edit</button>
+          <button class="custom-btn" mat-menu-item (click)="deleteCategory()">Delete</button>
+        </mat-menu> -->
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar class="toolbar">
+        <mat-icon style="margin-right: 5px">notes</mat-icon>
+        <span class="toolbar-spacer">Notes</span>
+        <span class="toolbar-spacer"></span>
+  
+        <button class="custom-btn" mat-button [matMenuTriggerFor]="menu">
+          <mat-icon>account_circle</mat-icon> &nbsp;
+          <mat-label>{{username}}</mat-label>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button class="custom-btn" mat-menu-item routerLink="/home/profile">Profile</button>
+          <button class="custom-btn" mat-menu-item (click)="changePassword()">Change Password</button>
+          <button class="custom-btn" mat-menu-item (click)="clearData()">Sign Out</button>
+        </mat-menu>
+      </mat-toolbar>
+      <!-- Add Content Here -->
+      <div class="content-area">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

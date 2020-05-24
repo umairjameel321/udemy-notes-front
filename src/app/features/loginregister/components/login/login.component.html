@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+
+<div class="my-form">
+  <form class="signup-form" [formGroup]="loginUserFormGroup" novalidate
+  (ngSubmit)="loginUserFormGroup.valid && loginUser()">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>LOGIN</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Email" formControlName="email">
+              <mat-error *ngIf="loginUserFormGroup.controls['email'].hasError('required')">
+                email is <strong>required</strong>
+              </mat-error>
+              <!-- <mat-error *ngIf="loginUserFormGroup.controls.email?.invalid">
+                This email is <strong>invalid</strong>
+              </mat-error> -->
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input type="password" matInput placeholder="Password" formControlName="password">
+              <mat-error *ngIf="loginUserFormGroup.controls['password'].hasError('required')">
+                Password is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="loginUserFormGroup.controls.password.errors?.minlength">
+                Minimum length should be 8
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">Login</button>
+      </mat-card-actions>
+      <p>
+        <a [routerLink]="'/forgotPassword'">Forgot Password?</a>
+      </p>
+      <p>
+        Don't have an account? <a [routerLink]="'/register'">Register here</a>
+      </p>
+    </mat-card>
+  </form>
+</div>
