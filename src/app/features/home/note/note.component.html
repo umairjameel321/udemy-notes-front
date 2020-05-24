@@ -1,0 +1,36 @@
+<mat-card style="margin: 20px">
+  <mat-card-header>
+    
+  </mat-card-header>
+  <mat-card-content>
+      <button mat-raised-button [routerLink]="['/home/category', categoryId, 'notes']">
+        <mat-icon>arrow_back</mat-icon>Back
+      </button>
+    <br><br>
+    <form [formGroup]="noteFormGroup">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Note Tile" formControlName="title">
+        <mat-error *ngIf="formValidation.title.errors">
+          <span *ngIf="formValidation.title.errors.required">Title is
+            <strong>required</strong></span>
+        </mat-error>
+      </mat-form-field>
+      <br>
+        <button mat-raised-button color="primary" type="submit" (click)="isEditState ? editNote() : createNote()">
+          {{isEditState ? 'Save Changes' : 'Create'}}
+          <mat-icon>
+            {{isEditState ? 'create' : 'add'}}
+          </mat-icon>
+        </button>
+    </form>
+    <br>
+    <!-- NOTE RICH EDITOR START -->
+    <div class="container">
+      <angular-editor [(ngModel)]="htmlContent" [config]="config" (ngModelChange)="isNotChanged = false">
+      </angular-editor>
+    </div>
+    <!-- NOTE RICH EDITOR ENDS -->
+
+  </mat-card-content>
+
+</mat-card>
